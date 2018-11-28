@@ -85,7 +85,7 @@
                                               </span>
                                             </p>
                                             <p class="control is-expanded">
-                                              <input class="input" type="text" placeholder="Transacton Amount">
+                                              <input class="input" type="text" placeholder="Transacton Amount" id="amount">
                                             </p>
                                            
                                           </div>
@@ -101,8 +101,7 @@
                                 <div class="field is-narrow">
                                     <div class="control">
                                         <div class="select is-fullwidth">
-                                            <select>
-                                            
+                                            <select id="credit-debit">
                                                 <option>Debit</option>
                                                 <option>Credit</option>
                                             </select>
@@ -120,7 +119,7 @@
                                     <div class="field is-narrow">
                                         <div class="control">
                                             <div class="select is-fullwidth">
-                                                <select>
+                                                <select id="category">
                                                     <option>Deposit</option>
                                                     <option>Payment</option>
                                                     <option>Entertainment</option>
@@ -145,7 +144,7 @@
                             <div class="field-body">
                                 <div class="field">
                                     <div class="control">
-                                        <textarea class="textarea" placeholder="Enter notes here"></textarea>
+                                        <textarea class="textarea" placeholder="Enter notes here" id="notes"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -158,7 +157,7 @@
                             <div class="field-body">
                                 <div class="field">
                                     <div class="control">
-                                        <button class="button is-info">
+                                        <button class="button is-info" id="submit">
                                             Submit Transaction
                                         </button>
                                     </div>
