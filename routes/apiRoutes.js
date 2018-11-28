@@ -3,21 +3,24 @@ var db = require("../models");
 module.exports = function(app) {
   // Get all examples
   app.get("/api/transactions/", function(req, res) {
-    db.Transactions.findAll({}).then(function(dbTransactions) {
-      res.json(dbTransactions);
+    db.Transactions.findAll({}).then(function(dbPost) {
+      res.json(dbPost);
    
     });
   });
 
-  app.post("/api/posts", function(req, res) {
+  app.post("/api/transactions", function(req, res) {
     console.log(req.body);
     db.Transactions.create({
-      title: req.body.title,
-      body: req.body.body,
-      category: req.body.category
+      category: req.body.category,
+      credit: req.body.credit,
+      transAmount: req.body.transAmount,
+      notes: req.body.notes,
+      
+      
     })
-      .then(function(dbPost) {
-        res.json(dbPost);
+      .then(function(dbTransactions) {
+        res.json(dbTransactions);
       });
   });
 
