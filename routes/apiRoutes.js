@@ -1,7 +1,12 @@
+//Requiring models
 var db = require("../models");
 
+//Routes
 module.exports = function(app) {
+  
   // Get all examples
+
+  //Get route for retrieving transactions
   app.get("/api/transactions/", function(req, res) {
     db.Transactions.findAll({}).then(function(dbPost) {
       res.json(dbPost);
@@ -9,6 +14,7 @@ module.exports = function(app) {
     });
   });
 
+  //POST for saving a new transaction
   app.post("/api/transactions", function(req, res) {
     console.log(req.body);
     db.Transactions.create({
@@ -19,6 +25,7 @@ module.exports = function(app) {
       
       
     })
+    //updating transactions
       .then(function(dbTransactions) {
         res.json(dbTransactions);
       });

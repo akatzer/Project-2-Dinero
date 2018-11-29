@@ -1,12 +1,10 @@
 $(document).ready(function () {
 
     var amount = $("#amount");
-
     var creditDebit = $("#creditDebit");
-
     var category = $("#category");
     var submit = $("#submit");
-   var notes = $("#notes")
+    var notes = $("#notes")
 
     $(submit).on("click", function () {
         event.preventDefault();
@@ -37,7 +35,6 @@ $(document).ready(function () {
                 notes: notes.val().trim(),
             };
         }
-    
 
         console.log(newTransaction)
         submitTransaction(newTransaction);
