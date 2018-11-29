@@ -7,9 +7,9 @@ module.exports = function(app) {
   // Get all examples
 
   //Get route for retrieving transactions
-  app.get("/api/transactions/", function(req, res) {
-    db.Transactions.findAll({}).then(function(dbPost) {
-      res.json(dbPost);
+  app.get("/api/transactions", function(req, res) {
+    db.Transactions.findAll({}).then(function(dbTransactions) {
+      res.json(dbTransactions);
    
     });
   });
