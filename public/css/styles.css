@@ -1,3 +1,20 @@
 .button.is-info {
     margin: 5px
 }
+.hero-body{
+    background-image: linear-gradient(#7eaacd, white);
+}
+
+#right{
+    background-color: white;
+}
+
+#left{
+    background-color: white;
+}
+.button.is-info{
+    background-color: #4682b4;
+}
+.footer{
+    background-image: linear-gradient(to top,#dae7f1, white);
+}
