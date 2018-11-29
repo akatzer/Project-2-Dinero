@@ -22,6 +22,7 @@
         <div class="hero-body">
             <div class="container">
                 <h1 class="title">
+                    <i class="fas fa-money-check-alt"></i>
                     DINERO
                 </h1>
                 <h2 class="subtitle">
@@ -33,15 +34,14 @@
 
     <div class="tile is-parent">
         <div class="tile is-parent is-3">
-            <article class="tile is-child notification has-background-grey">
+            <article id="right" class="tile is-child notification">
                 <div class="content">
                     <p class="title">Current Balance</p>
                     <p class="subtitle" id="currentBalance">$1234.56</p>
                     <div class="content">
 
                         <div class="control">
-                            <button class="button is-info is-large is-fullwidth" id="transactionHistory">Transaction
-                                History</button>
+                            <button class="button is-info is-large is-fullwidth" id="transactionHistory"> Transaction History</button>
                         </div>
                         <div class="control">
                             <button class="button is-info is-large is-fullwidth"id="newTransaction">New Transaction</button>
@@ -65,7 +65,7 @@
         </div>
 
         <div class="tile is-parent is-9">
-            <article class="tile is-child notification has-background-grey">
+            <article id="left" class="tile is-child notification">
                 <div class="content" id="mainContent">
                     <div id="transaction">
                         <h2 class="title">New Transaction</h2>
@@ -75,22 +75,22 @@
                                 <label class="label">Amount</label>
                             </div>
                             <div class="field-body">
-                                    <div class="field has-addons">
-                                            <p class="control">
-                                              <span class="select">
-                                                <select>
-                                                  <option>$</option>
-                                                 
-                                                </select>
-                                              </span>
-                                            </p>
-                                            <p class="control is-expanded">
-                                              <input class="input" type="text" placeholder="Transacton Amount" id="amount">
-                                            </p>
-                                           
-                                          </div>
+                                <div class="field has-addons">
+                                    <p class="control">
+                                        <span class="select">
+                                            <select>
+                                                <option>$</option>
+
+                                            </select>
+                                        </span>
+                                    </p>
+                                    <p class="control is-expanded">
+                                        <input class="input" type="text" placeholder="Transacton Amount" id="amount">
+                                    </p>
+
+                                </div>
                             </div>
-                            
+
                         </div>
 
                         <div class="field is-horizontal">
@@ -110,31 +110,31 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="field is-horizontal">
-                                <div class="field-label is-normal">
-                                    <label class="label">Category</label>
-                                </div>
-                                <div class="field-body">
-                                    <div class="field is-narrow">
-                                        <div class="control">
-                                            <div class="select is-fullwidth">
-                                                <select id="category">
-                                                    <option>Deposit</option>
-                                                    <option>Payment</option>
-                                                    <option>Entertainment</option>
-                                                    <option>Dining</option>
-                                                    <option>Retail</option>
-                                                    <option>Travel/Transporation</option>
-                                                    <option>Gas</option>
-                                                    <option>Work Expense</option>
-                                                </select>
-                                            </div>
+                            <div class="field-label is-normal">
+                                <label class="label">Category</label>
+                            </div>
+                            <div class="field-body">
+                                <div class="field is-narrow">
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select id="category">
+                                                <option>Deposit</option>
+                                                <option>Payment</option>
+                                                <option>Entertainment</option>
+                                                <option>Dining</option>
+                                                <option>Retail</option>
+                                                <option>Travel/Transporation</option>
+                                                <option>Gas</option>
+                                                <option>Work Expense</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        
+                        </div>
+
 
 
                         <div class="field is-horizontal">
