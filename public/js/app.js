@@ -45,15 +45,29 @@ $(document).ready(function () {
             window.location.href = "/";
         })
     }
-
-
-    $("#transactionHistory").on("click", function() {
-        var transactions = [];
+    function hideAll() {
         $("#transaction").hide();
         $("#table").show();
-        // Getting todos from database when page loads
-        getTransactions();
+    }
+
+    $("#transactionHistory").on("click", function () {
+        hideAll();   
+        $("#table").show();
+
+        var transactions = [];
         console.log(transactions)
+        getTransactions();
+    
+        function getTransactions() {
+            $.get("/api/transactions", function (data) {
+                transactions = data;
+                
+               
+            });
+        }
+        // Getting todos from database when page loads
+        
+       
         // This function resets the todos displayed with new todos from the database
         // function initializeRows() {
         //   var rowsToAdd = [];
@@ -62,20 +76,14 @@ $(document).ready(function () {
         //   }
         //   $todoContainer.prepend(rowsToAdd)
         // }
-      
+
         // This function grabs todos from the database and updates the view
-        function getTransactions() {
-          $.get("/api/transactions", function(data) {
-            transactions = data;
-            
-            // initializeRows();
-          });
-        }
+        
     })
 
-    $("#newTransaction").on("click", function() {
-        $("#transaction").show(),
-        $("#table").hide(),
+    $("#newTransaction").on("click", function () {
+        $("#table").hide();
+        $("#transaction").show()
     })
 });
 
