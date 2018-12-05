@@ -18,3 +18,15 @@
 .footer{
     background-image: linear-gradient(to top,#dae7f1, white);
 }
+
+.red {
+    color: red;
+}
+
+p.total {
+    text-align: center;
+}
+
+p.title {
+    text-align: center;
+}

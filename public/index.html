@@ -11,6 +11,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 
 
 
@@ -37,27 +38,24 @@
             <article id="right" class="tile is-child notification">
                 <div class="content">
                     <p class="title">Current Balance</p>
-                    <p class="subtitle" id="currentBalance">$1234.56</p>
+                    <p class="subtitle" id="currentBalance"></p>
                     <div class="content">
 
                         <div class="control">
-                            <button class="button is-info is-large is-fullwidth" id="transactionHistory"> Transaction History</button>
+                            <button class="button is-info is-large is-fullwidth" id="newTransaction">New Transaction</button>
                         </div>
                         <div class="control">
-                            <button class="button is-info is-large is-fullwidth"id="newTransaction">New Transaction</button>
+                            <button class="button is-info is-large is-fullwidth" id="transactionHistory"> Transaction
+                                History</button>
+                        </div>
+
+                        <div class="control">
+                            <button class="button is-info is-large is-fullwidth" id="income">Income</button>
                         </div>
                         <div class="control">
-                            <button class="button is-info is-large is-fullwidth">Income</button>
+                            <button class="button is-info is-large is-fullwidth" id="expenses">Expenses</button>
                         </div>
-                        <div class="control">
-                            <button class="button is-info is-large is-fullwidth">Expenses</button>
-                        </div>
-                        <div class="control">
-                            <button class="button is-info is-large is-fullwidth">Alerts</button>
-                        </div>
-                        <div class="control">
-                            <button class="button is-info is-large is-fullwidth">Accounts</button>
-                        </div>
+                        
 
                     </div>
                 </div>
@@ -166,39 +164,81 @@
                         </div>
 
                     </div>
-                   
-                      
-                      <div class="demo" id="table">
-                      
+
+
+                    <div class="demo" id="table">
+
                         <h1 id="responsive">Transaction History</h1>
                         <br>
-                        <table class="table is-responsive">
-                          <thead>
-                            <tr>
-                              <th>Amount</th>
-                              <th>Debit/Credit</th>
-                              <th>Category</th>
-                              <th>Date</th>
-                              <th>Notes</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>Lorem ipsum - cell A1</td>
-                              <td>Lorem ipsum - cell B1</td>
-                              <td>Lorem ipsum - cell C1</td>
-                              <td>Lorem ipsum - cell D1</td>
-                              <td>Lorem ipsum - cell E1</td>
-                            </tr>
-                           
-                          </tbody>
+                        <table class="table is-responsive" id="transTable">
+                            <thead>
+                                <tr>
+                                    <th>Amount</th>
+                                    <th>Debit/Credit</th>
+                                    <th>Category</th>
+                                    <th>Date</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+
+
+                            </tbody>
                         </table>
-                      
-                      </div>
-            </article>
-            
-        </div>
+
+                    </div>
+
+                    <div class="demo" id="creditTable">
+
+                            <h1 id="responsive">Account Credits</h1>
+                            <br>
+                            <table class="table is-responsive" id="transTable">
+                                <thead>
+                                    <tr>
+                                        <th>Amount</th>
+                                        <th>Category</th>
+                                        <th>Date</th>
+                                        <th>Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="creditTableBody">
+    
+    
+                                </tbody>
+                            </table>
+    
+                        </div>
+
+                        <div class="demo" id="debitTable">
+
+                                <h1 id="responsive">Expenses</h1>
+                                <br>
+                                <table class="table is-responsive" id="transTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Amount</th>
+                                            <th>Category</th>
+                                            <th>Date</th>
+                                            <th>Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="debitTableBody">
         
+        
+                                    </tbody>
+                                </table>
+        
+                            </div>
+
+                    <div id="welcomeMessage">
+                        <h1>Make a selection to get started!</h1>
+                    </div>
+
+
+            </article>
+
+        </div>
+
     </div>
 
 
