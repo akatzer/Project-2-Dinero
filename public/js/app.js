@@ -1,10 +1,63 @@
 $(document).ready(function () {
-    $("#table").hide()
+  
     var amount = $("#amount");
     var creditDebit = $("#creditDebit");
     var category = $("#category");
     var submit = $("#submit");
     var notes = $("#notes")
+
+    function getTransactions() {
+        $.get("/api/transactions", function (data) {
+            
+            transactions = data;
+            if (!transactions || !transactions.length) {
+                displayEmpty()
+            }
+            else {
+                initializeRows(data);
+                
+            }
+        });
+    }
+
+    function getCreditTransactions() {
+        $.get("/api/credits", function (data) {
+            
+            
+            if (!data.count || !data.rows.length) {
+                displayCreditEmpty()
+            }
+            else {
+                initializeCreditRows(data);
+                
+            }
+        });
+    }
+
+    function getDebitTransactions() {
+        $.get("/api/debits", function (data) {
+            
+            
+            if (!data.count || !data.rows.length) {
+                displayDebitEmpty()
+            }
+            else {
+                initializeDebitRows(data);
+                
+            }
+        });
+    }
+
+    function getTotal() {
+        $.get("/api/totalamount", function (total) {
+       
+            $("#currentBalance").html(`<p class="total ${total < 0 ? "red": ""}">$${total}</p>`)
+        });
+    }
+
+    
+
+
 
     $(submit).on("click", function () {
         event.preventDefault();
@@ -36,7 +89,7 @@ $(document).ready(function () {
             };
         }
 
-        console.log(newTransaction)
+      
         submitTransaction(newTransaction);
     });
 
@@ -47,44 +100,134 @@ $(document).ready(function () {
     }
     function hideAll() {
         $("#transaction").hide();
-        $("#table").show();
+        $("#table").hide();
+        $("#welcomeMessage").hide();
+        $("#creditTable").hide();
+        $("#debitTable").hide();
     }
 
     $("#transactionHistory").on("click", function () {
-        hideAll();   
+        hideAll();
         $("#table").show();
-
-        var transactions = [];
-        console.log(transactions)
-        getTransactions();
-    
-        function getTransactions() {
-            $.get("/api/transactions", function (data) {
-                transactions = data;
-                
-               
-            });
-        }
-        // Getting todos from database when page loads
-        
-       
-        // This function resets the todos displayed with new todos from the database
-        // function initializeRows() {
-        //   var rowsToAdd = [];
-        //   for (var i = 0; i < transactions.length; i++) {
-        //     rowsToAdd.push(createNewRow(transactions[i]));
-        //   }
-        //   $todoContainer.prepend(rowsToAdd)
-        // }
-
-        // This function grabs todos from the database and updates the view
-        
-    })
+     })
 
     $("#newTransaction").on("click", function () {
-        $("#table").hide();
+        hideAll();
         $("#transaction").show()
     })
+
+    $("#income").on("click", function () {
+        hideAll();
+        $("#creditTable").show();
+    })
+
+    $("#expenses").on("click", function() {
+        hideAll()
+        $("#debitTable").show();
+    })
+
+    function displayEmpty() {
+        $("#transTable").html(`<h2>You have no transaction history</h2>`)
+    }
+
+    function displayCreditEmpty() {
+        $("#creditTable").html(`<h2>You have no transaction history</h2>`)
+    }
+
+    function displayDebitEmpty() {
+        $("#creditTable").html(`<h2>You have no transaction history</h2>`)
+    }
+
+    function pageLoadMessage() {
+        $("#welcomeMessage").show();
+    }
+
+    function initializeRows(transactions) {
+        for (var i = 0; i < transactions.length; i++) {
+            
+            if (transactions[i].credit == 1) {
+                var credit = "Credit"
+            }
+            else {
+                var credit = "Debit"
+            }
+            $("#tableBody").prepend(`
+            <tr>
+                <td>$${transactions[i].transAmount}</td>
+                <td>${credit}</td>
+                <td>${transactions[i].category}</td>
+                <td>${moment(transactions[i].createdAt).format("LLL")}</td>
+                <td>${transactions[i].notes}</td>
+            </tr>
+           `)
+        }
+        
+        
+    }
+
+    function getCreditTotal() {
+        $.get("/api/totalcredit", function (total) {
+       
+            $("#creditTableBody").append(`
+            <tr>
+                <td><strong>$${total.toFixed(2)}</strong></td>
+            </tr>
+            `)
+            
+        
+        });
+    }
+
+    function getDebitTotal() {
+        $.get("/api/totalDebit", function (total) {
+            
+            $("#debitTableBody").append(`
+            <tr>
+                <td><strong>$${total.toFixed(2)}</strong></td>
+            </tr>
+            `)
+            
+        
+        });
+    }
+
+    function initializeCreditRows(transactions) {
+        for (var i = 0; i < transactions.rows.length; i++) {
+     
+            $("#creditTableBody").prepend(`
+            <tr>
+                <td>$${transactions.rows[i].transAmount}</td>
+                <td>${transactions.rows[i].category}</td>
+                <td>${moment(transactions.rows[i].createdAt).format("LLL")}</td>
+                <td>${transactions.rows[i].notes}</td>
+            </tr>
+           `)
+        }
+        getCreditTotal();
+    }
+
+    function initializeDebitRows(transactions) {
+        for (var i = 0; i < transactions.rows.length; i++) {
+     
+            $("#debitTableBody").prepend(`
+            <tr>
+                <td>$${(Math.abs(transactions.rows[i].transAmount)).toFixed(2)}</td>
+                <td>${transactions.rows[i].category}</td>
+                <td>${moment(transactions.rows[i].createdAt).format("LLL")}</td>
+                <td>${transactions.rows[i].notes}</td>
+            </tr>
+           `)
+        }
+        getDebitTotal();
+    }
+
+    getTotal();
+    getTransactions();
+    getCreditTransactions();
+    getDebitTransactions();
+    hideAll();
+    pageLoadMessage();
+    
 });
 
 
