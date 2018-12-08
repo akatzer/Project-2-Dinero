@@ -1,11 +1,10 @@
 .button.is-info {
-    margin: 5px
-    
+    margin: 5px;   
 }
+
 .hero-body{
     background-image: white;
     font-family: 'Anton', sans-serif;
-    
 }
 
 #right{
@@ -15,9 +14,11 @@
 #left{
     background-color: white;
 }
+
 .button.is-info{
     background-color: #4682b4;
 }
+
 .footer{
     background-image:white;
 }
@@ -32,5 +33,4 @@ p.total {
 
 p.title {
     text-align: center;
-
 }

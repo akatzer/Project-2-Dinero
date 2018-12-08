@@ -1,62 +1,54 @@
 $(document).ready(function () {
-  
+
     var amount = $("#amount");
     var creditDebit = $("#creditDebit");
     var category = $("#category");
     var submit = $("#submit");
     var notes = $("#notes")
 
+
     function getTransactions() {
         $.get("/api/transactions", function (data) {
-            
             transactions = data;
             if (!transactions || !transactions.length) {
                 displayEmpty()
             }
             else {
                 initializeRows(data);
-                
             }
         });
     }
 
+
     function getCreditTransactions() {
         $.get("/api/credits", function (data) {
-            
-            
             if (!data.count || !data.rows.length) {
                 displayCreditEmpty()
             }
             else {
                 initializeCreditRows(data);
-                
             }
         });
     }
 
+
     function getDebitTransactions() {
         $.get("/api/debits", function (data) {
-            
-            
             if (!data.count || !data.rows.length) {
                 displayDebitEmpty()
             }
             else {
                 initializeDebitRows(data);
-                
             }
         });
     }
 
+
     function getTotal() {
         $.get("/api/totalamount", function (total) {
-       
-            $("#currentBalance").html(`<p class="total ${total < 0 ? "red": ""}">$${total}</p>`)
+            $("#currentBalance").html(`<p class="total ${total < 0 ? "red" : ""}">$${total}</p>`)
         });
     }
-
-    
-
 
 
     $(submit).on("click", function () {
@@ -88,16 +80,17 @@ $(document).ready(function () {
                 notes: notes.val().trim(),
             };
         }
-
-      
         submitTransaction(newTransaction);
     });
+
 
     function submitTransaction(Transaction) {
         $.post("/api/transactions", Transaction, function () {
             window.location.href = "/";
         })
     }
+
+
     function hideAll() {
         $("#transaction").hide();
         $("#table").hide();
@@ -106,25 +99,30 @@ $(document).ready(function () {
         $("#debitTable").hide();
     }
 
+
     $("#transactionHistory").on("click", function () {
         hideAll();
         $("#table").show();
-     })
+    })
+
 
     $("#newTransaction").on("click", function () {
         hideAll();
         $("#transaction").show()
     })
 
+
     $("#income").on("click", function () {
         hideAll();
         $("#creditTable").show();
     })
 
-    $("#expenses").on("click", function() {
+
+    $("#expenses").on("click", function () {
         hideAll()
         $("#debitTable").show();
     })
+
 
     function displayEmpty() {
         $("#transTable").html(`<h2>You have no transaction history</h2>`)
@@ -134,17 +132,20 @@ $(document).ready(function () {
         $("#creditTable").html(`<h2>You have no transaction history</h2>`)
     }
 
+
     function displayDebitEmpty() {
         $("#creditTable").html(`<h2>You have no transaction history</h2>`)
     }
 
+
     function pageLoadMessage() {
         $("#welcomeMessage").show();
     }
+    
 
     function initializeRows(transactions) {
         for (var i = 0; i < transactions.length; i++) {
-            
+
             if (transactions[i].credit == 1) {
                 var credit = "Credit"
             }
@@ -161,39 +162,33 @@ $(document).ready(function () {
             </tr>
            `)
         }
-        
-        
+
+
     }
 
     function getCreditTotal() {
         $.get("/api/totalcredit", function (total) {
-       
             $("#creditTableBody").append(`
             <tr>
                 <td><strong>$${total.toFixed(2)}</strong></td>
             </tr>
             `)
-            
-        
         });
     }
 
     function getDebitTotal() {
         $.get("/api/totalDebit", function (total) {
-            
             $("#debitTableBody").append(`
             <tr>
                 <td><strong>$${total.toFixed(2)}</strong></td>
             </tr>
             `)
-            
-        
         });
     }
 
     function initializeCreditRows(transactions) {
         for (var i = 0; i < transactions.rows.length; i++) {
-     
+
             $("#creditTableBody").prepend(`
             <tr>
                 <td>$${transactions.rows[i].transAmount}</td>
@@ -208,7 +203,7 @@ $(document).ready(function () {
 
     function initializeDebitRows(transactions) {
         for (var i = 0; i < transactions.rows.length; i++) {
-     
+
             $("#debitTableBody").prepend(`
             <tr>
                 <td>$${(Math.abs(transactions.rows[i].transAmount)).toFixed(2)}</td>
@@ -227,7 +222,7 @@ $(document).ready(function () {
     getDebitTransactions();
     hideAll();
     pageLoadMessage();
-    
+
 });
 
 
