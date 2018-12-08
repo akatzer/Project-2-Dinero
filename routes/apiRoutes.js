@@ -10,9 +10,9 @@ module.exports = function (app) {
   app.get("/api/transactions", function (req, res) {
     db.Transactions.findAll({}).then(function (dbTransactions) {
       res.json(dbTransactions);
-
     });
   });
+
 
   //POST for saving a new transaction
   app.post("/api/transactions", function (req, res) {
@@ -22,8 +22,6 @@ module.exports = function (app) {
       credit: req.body.credit,
       transAmount: req.body.transAmount,
       notes: req.body.notes,
-
-
     })
       //updating transactions
       .then(function (dbTransactions) {
@@ -31,80 +29,66 @@ module.exports = function (app) {
       });
   });
 
+
   app.get("/api/totalamount", function (req, res) {
     db.Transactions.findAll({}).then(function (dbTransactions) {
       var transactions = [];
-
       function add(a, b) {
         return parseFloat(a) + parseFloat(b);
       }
-
       for (i = 0; i < dbTransactions.length; i++) {
         transactions.push(dbTransactions[i].transAmount)
       }
-
       var sum = transactions.reduce(add, 0);
       res.json(sum);
     })
   })
+
 
   app.get("/api/totalcredit", function (req, res) {
     db.Transactions.findAndCountAll({where: {credit: true}}).then(function (dbTransactions) {
   console.log(dbTransactions.rows)
       var transactions = [];
-
       function add(a, b) {
         return parseFloat(a) + parseFloat(b);
       }
-
       for (i = 0; i < dbTransactions.rows.length; i++) {
-        
           transactions.push(dbTransactions.rows[i].transAmount)
-        
-        
       }
-
       var sum = transactions.reduce(add, 0);
       res.json(sum);
       console.log(sum)
     })
   })
 
-  app.get("/api/credits", function (req, res) {
-    db.Transactions.findAndCountAll({where: {credit: true}}).then(function (dbTransactions) {
-      
-      res.json(dbTransactions);
 
+  app.get("/api/credits", function (req, res) {
+    db.Transactions.findAndCountAll({where: {credit: true}}).then(function (dbTransactions) {    
+      res.json(dbTransactions);
     });
   });
+
 
   app.get("/api/totaldebit", function (req, res) {
     db.Transactions.findAndCountAll({where: {credit: false}}).then(function (dbTransactions) {
   console.log(dbTransactions.rows)
       var transactions = [];
-
       function add(a, b) {
         return parseFloat(a) + parseFloat(b);
       }
-
       for (i = 0; i < dbTransactions.rows.length; i++) {
-        
           transactions.push(Math.abs(dbTransactions.rows[i].transAmount))
-        
-        
       }
-
       var sum = transactions.reduce(add, 0);
       res.json(sum);
       console.log(sum)
     })
   })
 
+
   app.get("/api/debits", function (req, res) {
     db.Transactions.findAndCountAll({where: {credit: false}}).then(function (dbTransactions) {
-      
       res.json(dbTransactions);
-
     });
   });
 
