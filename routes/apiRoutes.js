@@ -30,7 +30,7 @@ module.exports = function (app) {
         res.json(dbTransactions);
       });
   });
-
+// get to pull all transactions from db
   app.get("/api/totalamount", function (req, res) {
     db.Transactions.findAll({}).then(function (dbTransactions) {
       var transactions = [];
@@ -47,7 +47,7 @@ module.exports = function (app) {
       res.json(sum);
     })
   })
-
+// updates db total depending on credit or debit
   app.get("/api/totalcredit", function (req, res) {
     db.Transactions.findAndCountAll({where: {credit: true}}).then(function (dbTransactions) {
   console.log(dbTransactions.rows)
