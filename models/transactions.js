@@ -6,7 +6,6 @@ module.exports = function (sequelize, DataTypes) {
         createdAt: { type: DataTypes.DATE, defaultValue: sequelize.literal("now()") },
         updatedAt: { type: DataTypes.DATE, defaultValue: sequelize.literal("now()") },
         notes: DataTypes.TEXT,
-      
     });
     return Transactions;
 };
