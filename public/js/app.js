@@ -61,7 +61,7 @@ $(document).ready(function () {
 
     $(submit).on("click", function () {
         event.preventDefault();
-        if (creditDebit.val() === "Credit") {
+        if (creditDebit.val() === "Deposit") {
             var boolean = 1
         }
         else {
@@ -158,10 +158,10 @@ $(document).ready(function () {
         for (var i = 0; i < transactions.length; i++) {
 
             if (transactions[i].credit == 1) {
-                var credit = "Credit"
+                var credit = "Deposit"
             }
             else {
-                var credit = "Debit"
+                var credit = "Withdrawal"
             }
             $("#tableBody").prepend(`
             <tr>
