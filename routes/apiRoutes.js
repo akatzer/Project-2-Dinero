@@ -29,6 +29,9 @@ module.exports = function (app) {
       });
   });
 
+// get to pull all transactions from db
+
+
 
   app.get("/api/totalamount", function (req, res) {
     db.Transactions.findAll({}).then(function (dbTransactions) {
@@ -43,6 +46,9 @@ module.exports = function (app) {
       res.json(sum);
     })
   })
+
+// updates db total depending on credit or debit
+
 
 
   app.get("/api/totalcredit", function (req, res) {

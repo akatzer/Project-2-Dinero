@@ -6,6 +6,7 @@ $(document).ready(function () {
     var submit = $("#submit");
     var notes = $("#notes")
 
+//  gets all transactions in db
 
     function getTransactions() {
         $.get("/api/transactions", function (data) {
@@ -19,6 +20,7 @@ $(document).ready(function () {
         });
     }
 
+// gets credit only submitions from db
 
     function getCreditTransactions() {
         $.get("/api/credits", function (data) {
@@ -31,6 +33,7 @@ $(document).ready(function () {
         });
     }
 
+// gets debit only submitions from db
 
     function getDebitTransactions() {
         $.get("/api/debits", function (data) {
@@ -43,6 +46,7 @@ $(document).ready(function () {
         });
     }
 
+// gets total submitions from db
 
     function getTotal() {
         $.get("/api/totalamount", function (total) {
@@ -50,6 +54,10 @@ $(document).ready(function () {
         });
     }
 
+    
+
+
+// submits user input only if all fields have been entered
 
     $(submit).on("click", function () {
         event.preventDefault();
@@ -82,6 +90,9 @@ $(document).ready(function () {
         }
         submitTransaction(newTransaction);
     });
+
+// pushs user data into db as well as pulling and hiding transaction table
+
 
 
     function submitTransaction(Transaction) {
@@ -185,7 +196,7 @@ $(document).ready(function () {
             `)
         });
     }
-
+// posts to table 
     function initializeCreditRows(transactions) {
         for (var i = 0; i < transactions.rows.length; i++) {
 
@@ -216,6 +227,18 @@ $(document).ready(function () {
         getDebitTotal();
     }
 
+    // home button to scroll page to bottom where input is 
+    var $elem = $('#body');
+function scrollToBottom(){
+    $('#home').click(
+		function () {
+            $('html, body').animate({scrollTop: $elem.height()}, 800);
+            console.log("test");
+		}
+    )
+    };
+    // runs all functions on page load
+    scrollToBottom();
     getTotal();
     getTransactions();
     getCreditTransactions();
